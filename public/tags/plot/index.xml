@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plot on </title>
+    <link>/tags/plot/</link>
+    <description>Recent content in Plot on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Benjamin Scheich</copyright>
+    <lastBuildDate>Fri, 23 Jun 2017 21:13:14 -0500</lastBuildDate>
+    <atom:link href="/tags/plot/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Analyzing Member Survey Data</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Fri, 23 Jun 2017 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>&lt;p&gt;Our organization decided to create a five question survey for new members. The purpose of the survey was to check-in on the members six months after they began their membership with our professional association. This post will discuss the data clean-up associated with the analysis.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#set working directory
+setwd(&amp;quot;C:/Users/bscheich/Documents&amp;quot;)
+#read in the data
+data &amp;lt;- read.csv(&amp;quot;6 month new member survey.csv&amp;quot;, header=TRUE)
+#rename columns to make the data easier to analyze
+colnames(data)[colnames(data) == &amp;#39;Question.ID&amp;#39;] &amp;lt;- &amp;#39;Quest_ID&amp;#39;
+colnames(data)[colnames(data) == &amp;quot;Respondent.s.Answer&amp;quot;] &amp;lt;- &amp;#39;Resp_ans&amp;#39;
+colnames(data)[colnames(data) == &amp;quot;Respondent.ID&amp;quot;] &amp;lt;- &amp;#39;Resp_ID&amp;#39;
+colnames(data)[colnames(data) == &amp;quot;Answer.ID&amp;quot;] &amp;lt;- &amp;#39;Ans_ID&amp;#39;
+head(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           Survey.Quiz.Title Respondent.Name..First. Respondent.Name..Last.
+## 1 6-Month New Member Survey                     Ben                Scheich
+## 2 6-Month New Member Survey                     Ben                Scheich
+## 3 6-Month New Member Survey                     Ben                Scheich
+## 4 6-Month New Member Survey                     Ben                Scheich
+## 5 6-Month New Member Survey                     Ben                Scheich
+## 6 6-Month New Member Survey                     Ben                Scheich
+##    Date.Submitted
+## 1 6/21/2017 11:35
+## 2 6/21/2017 11:35
+## 3 6/21/2017 11:35
+## 4 6/21/2017 11:35
+## 5 6/21/2017 11:35
+## 6 6/21/2017 11:35
+##                                                                                             Question
+## 1 1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
+## 2      2. Which member benefits have you taken advantage of (&amp;lt;strong&amp;gt;check all that apply&amp;lt;/strong&amp;gt;)?
+## 3      2. Which member benefits have you taken advantage of (&amp;lt;strong&amp;gt;check all that apply&amp;lt;/strong&amp;gt;)?
+## 4      2. Which member benefits have you taken advantage of (&amp;lt;strong&amp;gt;check all that apply&amp;lt;/strong&amp;gt;)?
+## 5      2. Which member benefits have you taken advantage of (&amp;lt;strong&amp;gt;check all that apply&amp;lt;/strong&amp;gt;)?
+## 6      2. Which member benefits have you taken advantage of (&amp;lt;strong&amp;gt;check all that apply&amp;lt;/strong&amp;gt;)?
+##                      Question.Format
+## 1 Single-Select (i.e. radio buttons)
+## 2     Multi-Select (i.e. checkboxes)
+## 3     Multi-Select (i.e. checkboxes)
+## 4     Multi-Select (i.e. checkboxes)
+## 5     Multi-Select (i.e. checkboxes)
+## 6     Multi-Select (i.e. checkboxes)
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp;amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&amp;#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters
+##   Answer.Is.Correct Resp_ID Quest_ID  Ans_ID
+## 1               N/A 2750661   914786 3143574
+## 2               N/A 2750661   914787 3143575
+## 3               N/A 2750661   914787 3143576
+## 4               N/A 2750661   914787 3143577
+## 5               N/A 2750661   914787 3143578
+## 6               N/A 2750661   914787 3155911&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To make the table easier to read and to remove questions that people did not answer, we will remove the Question field. Don’t worry, though. We will put it back in later.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#create data lookup table for questions
+
+quest &amp;lt;- data %&amp;gt;% distinct(Quest_ID,Question)
+
+#remove the question column for formatting purposes
+remove &amp;lt;- !names(data)  %in% c(&amp;quot;Question&amp;quot;)
+#removing the question column
+data &amp;lt;- data[,remove]
+head(data)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           Survey.Quiz.Title Respondent.Name..First. Respondent.Name..Last.
+## 1 6-Month New Member Survey                     Ben                Scheich
+## 2 6-Month New Member Survey                     Ben                Scheich
+## 3 6-Month New Member Survey                     Ben                Scheich
+## 4 6-Month New Member Survey                     Ben                Scheich
+## 5 6-Month New Member Survey                     Ben                Scheich
+## 6 6-Month New Member Survey                     Ben                Scheich
+##    Date.Submitted                    Question.Format
+## 1 6/21/2017 11:35 Single-Select (i.e. radio buttons)
+## 2 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 3 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 4 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 5 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 6 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp;amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&amp;#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters
+##   Answer.Is.Correct Resp_ID Quest_ID  Ans_ID
+## 1               N/A 2750661   914786 3143574
+## 2               N/A 2750661   914787 3143575
+## 3               N/A 2750661   914787 3143576
+## 4               N/A 2750661   914787 3143577
+## 5               N/A 2750661   914787 3143578
+## 6               N/A 2750661   914787 3155911&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I will now do some cleanup on the questions themselves, as there are hypertext tags in the question fields. The first steps below remove the hypertext tags, followed by the linking of the questions back into the data frame.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#removes the hypertext tags from the questions for better formatting
+
+cleanFun &amp;lt;- function(htmlString) {
+  return(gsub(&amp;quot;&amp;lt;.*?&amp;gt;&amp;quot;, &amp;quot;&amp;quot;, htmlString))
+}
+
+#overwrite text questions
+quest[,2]&amp;lt;- apply(quest[,2, drop=F], 2, cleanFun)
+quest$Question &amp;lt;- as.factor(quest$Question)
+
+#merge the questions and the question ids with the original data
+df_merged &amp;lt;- merge(x = data, y = quest, by = &amp;#39;Quest_ID&amp;#39;, all= TRUE)
+
+df_merged &amp;lt;- df_merged[,c(&amp;quot;Date.Submitted&amp;quot;, &amp;quot;Question.Format&amp;quot;, &amp;quot;Quest_ID&amp;quot;,  &amp;quot;Question&amp;quot;, &amp;quot;Resp_ID&amp;quot;, &amp;quot;Ans_ID&amp;quot;, &amp;quot;Resp_ans&amp;quot;)]
+
+head(df_merged)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    Date.Submitted                    Question.Format Quest_ID
+## 1 6/21/2017 11:35 Single-Select (i.e. radio buttons)   914786
+## 2 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 3 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 4 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 5 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 6 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+##                                                                                             Question
+## 1 1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
+## 2                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 3                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 4                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 5                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 6                       2. Which member benefits have you taken advantage of (check all that apply)?
+##   Resp_ID  Ans_ID
+## 1 2750661 3143574
+## 2 2750661 3143575
+## 3 2750661 3143576
+## 4 2750661 3143577
+## 5 2750661 3143578
+## 6 2750661 3155911
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp;amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&amp;#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Respondents are given the option of selecting more than one answer for the multi-response questions. With the goal of getting the data into long format for graphing, I needed to do a little work by combining the question ID field and the Answer ID field, which made visualizing these questions much easier.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#create a space for merged id fields
+df_merged$id &amp;lt;- df_merged$Quest_ID
+
+#create a new question identifier for all multi select check boxes
+mult &amp;lt;- df_merged$Question.Format==&amp;#39;Multi-Select (i.e. checkboxes)&amp;#39; 
+
+#subset all questions with Multi-Select
+subset &amp;lt;- df_merged[mult,]
+
+df_merged[mult, &amp;quot;id&amp;quot;] &amp;lt;- paste(subset$Quest_ID,subset$Ans_ID, sep=&amp;quot;.&amp;quot;)
+
+col_head &amp;lt;- df_merged %&amp;gt;% distinct(id,Question)
+
+df_long &amp;lt;- dcast(df_merged, Resp_ID~id, value.var=&amp;quot;Resp_ans&amp;quot;)
+
+#create column headings for the updated spreadsheet
+col_head &amp;lt;- df_merged %&amp;gt;% distinct(id,Question)
+col_head &amp;lt;- paste(col_head$id,col_head$Question, sep=&amp;quot;-&amp;quot;)
+
+col_head &amp;lt;- c(&amp;quot;Resp_ID&amp;quot;, col_head)
+
+colnames(df_long) &amp;lt;- col_head &lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Including Plots&lt;/h1&gt;
+&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
+  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
+  init.angle = -50, border = NA
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: A fancy pie chart.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

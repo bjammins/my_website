@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publications on </title>
+    <link>/publication/</link>
+    <description>Recent content in Publications on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Benjamin Scheich</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/publication/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Postpartum Hemorrhage Preparedness Elements Vary Among Hospitals in New Jersey and Georgia</title>
+      <link>/publication/postpartum-hemorrhage-preparedness/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/postpartum-hemorrhage-preparedness/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Content Validity Testing of the Maternal Fetal Triage Index</title>
+      <link>/publication/mfti-content-validation/</link>
+      <pubDate>Thu, 15 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/mfti-content-validation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interrater Reliability Testing of the Maternal Fetal Triage Index</title>
+      <link>/publication/mfti-interrater-reliability/</link>
+      <pubDate>Thu, 15 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/mfti-interrater-reliability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Predicting Tumour Stages of Lung Cancer Adenocarcinoma Tumours from Pooled Microarray Data Using Machine Learning Methods.</title>
+      <link>/publication/predicting-tumor-stages/</link>
+      <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/predicting-tumor-stages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Key Findings from the AWHONN Perinatal Staffing Data Collaborative</title>
+      <link>/publication/perinatal-staffing/</link>
+      <pubDate>Wed, 04 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/perinatal-staffing/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

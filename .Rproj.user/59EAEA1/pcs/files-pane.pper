@@ -1,0 +1,9 @@
+{
+    "path" : "~/my_website_updated/content/publication",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

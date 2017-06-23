@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.21" />
+  <meta name="author" content="Benjamin Scheich">
+  <meta name="description" content="Director, Data Analytics">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
+  <link rel="stylesheet" href="/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="">
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="/post/2015-07-23-r-rmarkdown/">
+
+  
+
+  <title>Analyzing Member Survey Data | </title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">Analyzing Member Survey Data</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-06-23 21:13:14 -0500 -0500" itemprop="datePublished">
+      Fri, Jun 23, 2017
+    </time>
+  </span>
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/tags/r-markdown">R Markdown</a
+    >, 
+    
+    <a href="/tags/plot">plot</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2015-07-23-r-rmarkdown%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Analyzing%20Member%20Survey%20Data&amp;url=%2fpost%2f2015-07-23-r-rmarkdown%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2015-07-23-r-rmarkdown%2f&amp;title=Analyzing%20Member%20Survey%20Data"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2015-07-23-r-rmarkdown%2f&amp;title=Analyzing%20Member%20Survey%20Data"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Analyzing%20Member%20Survey%20Data&amp;body=%2fpost%2f2015-07-23-r-rmarkdown%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      <p>Our organization decided to create a five question survey for new members. The purpose of the survey was to check-in on the members six months after they began their membership with our professional association. This post will discuss the data clean-up associated with the analysis.</p>
+<pre class="r"><code>#set working directory
+setwd(&quot;C:/Users/bscheich/Documents&quot;)
+#read in the data
+data &lt;- read.csv(&quot;6 month new member survey.csv&quot;, header=TRUE)
+#rename columns to make the data easier to analyze
+colnames(data)[colnames(data) == &#39;Question.ID&#39;] &lt;- &#39;Quest_ID&#39;
+colnames(data)[colnames(data) == &quot;Respondent.s.Answer&quot;] &lt;- &#39;Resp_ans&#39;
+colnames(data)[colnames(data) == &quot;Respondent.ID&quot;] &lt;- &#39;Resp_ID&#39;
+colnames(data)[colnames(data) == &quot;Answer.ID&quot;] &lt;- &#39;Ans_ID&#39;
+head(data)</code></pre>
+<pre><code>##           Survey.Quiz.Title Respondent.Name..First. Respondent.Name..Last.
+## 1 6-Month New Member Survey                     Ben                Scheich
+## 2 6-Month New Member Survey                     Ben                Scheich
+## 3 6-Month New Member Survey                     Ben                Scheich
+## 4 6-Month New Member Survey                     Ben                Scheich
+## 5 6-Month New Member Survey                     Ben                Scheich
+## 6 6-Month New Member Survey                     Ben                Scheich
+##    Date.Submitted
+## 1 6/21/2017 11:35
+## 2 6/21/2017 11:35
+## 3 6/21/2017 11:35
+## 4 6/21/2017 11:35
+## 5 6/21/2017 11:35
+## 6 6/21/2017 11:35
+##                                                                                             Question
+## 1 1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
+## 2      2. Which member benefits have you taken advantage of (&lt;strong&gt;check all that apply&lt;/strong&gt;)?
+## 3      2. Which member benefits have you taken advantage of (&lt;strong&gt;check all that apply&lt;/strong&gt;)?
+## 4      2. Which member benefits have you taken advantage of (&lt;strong&gt;check all that apply&lt;/strong&gt;)?
+## 5      2. Which member benefits have you taken advantage of (&lt;strong&gt;check all that apply&lt;/strong&gt;)?
+## 6      2. Which member benefits have you taken advantage of (&lt;strong&gt;check all that apply&lt;/strong&gt;)?
+##                      Question.Format
+## 1 Single-Select (i.e. radio buttons)
+## 2     Multi-Select (i.e. checkboxes)
+## 3     Multi-Select (i.e. checkboxes)
+## 4     Multi-Select (i.e. checkboxes)
+## 5     Multi-Select (i.e. checkboxes)
+## 6     Multi-Select (i.e. checkboxes)
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters
+##   Answer.Is.Correct Resp_ID Quest_ID  Ans_ID
+## 1               N/A 2750661   914786 3143574
+## 2               N/A 2750661   914787 3143575
+## 3               N/A 2750661   914787 3143576
+## 4               N/A 2750661   914787 3143577
+## 5               N/A 2750661   914787 3143578
+## 6               N/A 2750661   914787 3155911</code></pre>
+<p>To make the table easier to read and to remove questions that people did not answer, we will remove the Question field. Don’t worry, though. We will put it back in later.</p>
+<pre class="r"><code>#create data lookup table for questions
+
+quest &lt;- data %&gt;% distinct(Quest_ID,Question)
+
+#remove the question column for formatting purposes
+remove &lt;- !names(data)  %in% c(&quot;Question&quot;)
+#removing the question column
+data &lt;- data[,remove]
+head(data)</code></pre>
+<pre><code>##           Survey.Quiz.Title Respondent.Name..First. Respondent.Name..Last.
+## 1 6-Month New Member Survey                     Ben                Scheich
+## 2 6-Month New Member Survey                     Ben                Scheich
+## 3 6-Month New Member Survey                     Ben                Scheich
+## 4 6-Month New Member Survey                     Ben                Scheich
+## 5 6-Month New Member Survey                     Ben                Scheich
+## 6 6-Month New Member Survey                     Ben                Scheich
+##    Date.Submitted                    Question.Format
+## 1 6/21/2017 11:35 Single-Select (i.e. radio buttons)
+## 2 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 3 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 4 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 5 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+## 6 6/21/2017 11:35     Multi-Select (i.e. checkboxes)
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters
+##   Answer.Is.Correct Resp_ID Quest_ID  Ans_ID
+## 1               N/A 2750661   914786 3143574
+## 2               N/A 2750661   914787 3143575
+## 3               N/A 2750661   914787 3143576
+## 4               N/A 2750661   914787 3143577
+## 5               N/A 2750661   914787 3143578
+## 6               N/A 2750661   914787 3155911</code></pre>
+<p>I will now do some cleanup on the questions themselves, as there are hypertext tags in the question fields. The first steps below remove the hypertext tags, followed by the linking of the questions back into the data frame.</p>
+<pre class="r"><code>#removes the hypertext tags from the questions for better formatting
+
+cleanFun &lt;- function(htmlString) {
+  return(gsub(&quot;&lt;.*?&gt;&quot;, &quot;&quot;, htmlString))
+}
+
+#overwrite text questions
+quest[,2]&lt;- apply(quest[,2, drop=F], 2, cleanFun)
+quest$Question &lt;- as.factor(quest$Question)
+
+#merge the questions and the question ids with the original data
+df_merged &lt;- merge(x = data, y = quest, by = &#39;Quest_ID&#39;, all= TRUE)
+
+df_merged &lt;- df_merged[,c(&quot;Date.Submitted&quot;, &quot;Question.Format&quot;, &quot;Quest_ID&quot;,  &quot;Question&quot;, &quot;Resp_ID&quot;, &quot;Ans_ID&quot;, &quot;Resp_ans&quot;)]
+
+head(df_merged)</code></pre>
+<pre><code>##    Date.Submitted                    Question.Format Quest_ID
+## 1 6/21/2017 11:35 Single-Select (i.e. radio buttons)   914786
+## 2 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 3 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 4 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 5 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+## 6 6/21/2017 11:35     Multi-Select (i.e. checkboxes)   914787
+##                                                                                             Question
+## 1 1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
+## 2                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 3                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 4                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 5                       2. Which member benefits have you taken advantage of (check all that apply)?
+## 6                       2. Which member benefits have you taken advantage of (check all that apply)?
+##   Resp_ID  Ans_ID
+## 1 2750661 3143574
+## 2 2750661 3143575
+## 3 2750661 3143576
+## 4 2750661 3143577
+## 5 2750661 3143578
+## 6 2750661 3155911
+##                                                             Resp_ans
+## 1                                                               E. 5
+## 2 A.  Journal of Obstetric, Gynecologic, &amp; Neonatal Nursing (JOGNN) 
+## 3                                B. Nursing for Women&#39;s Health (NWH)
+## 4                                                        C. FREE CNE
+## 5                                                 D. Practice Briefs
+## 6                                               E. Sections/Chapters</code></pre>
+<p>Respondents are given the option of selecting more than one answer for the multi-response questions. With the goal of getting the data into long format for graphing, I needed to do a little work by combining the question ID field and the Answer ID field, which made visualizing these questions much easier.</p>
+<pre class="r"><code>#create a space for merged id fields
+df_merged$id &lt;- df_merged$Quest_ID
+
+#create a new question identifier for all multi select check boxes
+mult &lt;- df_merged$Question.Format==&#39;Multi-Select (i.e. checkboxes)&#39; 
+
+#subset all questions with Multi-Select
+subset &lt;- df_merged[mult,]
+
+df_merged[mult, &quot;id&quot;] &lt;- paste(subset$Quest_ID,subset$Ans_ID, sep=&quot;.&quot;)
+
+col_head &lt;- df_merged %&gt;% distinct(id,Question)
+
+df_long &lt;- dcast(df_merged, Resp_ID~id, value.var=&quot;Resp_ans&quot;)
+
+#create column headings for the updated spreadsheet
+col_head &lt;- df_merged %&gt;% distinct(id,Question)
+col_head &lt;- paste(col_head$id,col_head$Question, sep=&quot;-&quot;)
+
+col_head &lt;- c(&quot;Resp_ID&quot;, col_head)
+
+colnames(df_long) &lt;- col_head </code></pre>
+<div id="including-plots" class="section level1">
+<h1>Including Plots</h1>
+<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
+<pre class="r"><code>par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
+  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
+  init.angle = -50, border = NA
+)</code></pre>
+<div class="figure"><span id="fig:pie"></span>
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
+<p class="caption">
+Figure 1: A fancy pie chart.
+</p>
+</div>
+</div>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="/post/getting-started/"><span
+      aria-hidden="true">&larr;</span> Getting started with the Academic framework for Hugo</a></li>
+    
+
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Benjamin Scheich &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/js/jquery-1.12.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
