@@ -1,0 +1,112 @@
+---
+title: "Analyzing Member Survey Data"
+author: "Ben Scheich"
+date: 2017-06-23T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot"]
+---
+ 
+```{r setup, include=FALSE}
+library(ggplot2)
+library(reshape2)
+library(dplyr)
+library(readxl)
+#library(RCurl)
+library(XML)
+```
+
+Our organization decided to create a five question survey for new members.  The purpose of the survey was to check-in on the members six months after they began their membership with our professional association.  This post will discuss the data clean-up associated with the analysis.   
+
+
+```{r}
+#set working directory
+setwd("C:/Users/bscheich/Documents")
+#read in the data
+data <- read.csv("6 month new member survey.csv", header=TRUE)
+#rename columns to make the data easier to analyze
+colnames(data)[colnames(data) == 'Question.ID'] <- 'Quest_ID'
+colnames(data)[colnames(data) == "Respondent.s.Answer"] <- 'Resp_ans'
+colnames(data)[colnames(data) == "Respondent.ID"] <- 'Resp_ID'
+colnames(data)[colnames(data) == "Answer.ID"] <- 'Ans_ID'
+head(data)
+```
+
+To make the table easier to read and to remove questions that people did not answer, we will remove the Question field.  Don't worry, though. We will put it back in later.
+
+```{r}
+#create data lookup table for questions
+
+quest <- data %>% distinct(Quest_ID,Question)
+
+#remove the question column for formatting purposes
+remove <- !names(data)  %in% c("Question")
+#removing the question column
+data <- data[,remove]
+head(data)
+```
+
+I will now do some cleanup on the questions themselves, as there are hypertext tags in the question fields.  The first steps below remove the hypertext tags, followed by the linking of the questions back into the data frame.
+
+```{r}
+#removes the hypertext tags from the questions for better formatting
+
+cleanFun <- function(htmlString) {
+  return(gsub("<.*?>", "", htmlString))
+}
+
+#overwrite text questions
+quest[,2]<- apply(quest[,2, drop=F], 2, cleanFun)
+quest$Question <- as.factor(quest$Question)
+
+#merge the questions and the question ids with the original data
+df_merged <- merge(x = data, y = quest, by = 'Quest_ID', all= TRUE)
+
+df_merged <- df_merged[,c("Date.Submitted", "Question.Format", "Quest_ID",  "Question", "Resp_ID", "Ans_ID", "Resp_ans")]
+
+head(df_merged)
+```
+
+Respondents are given the option of selecting more than one answer for the multi-response questions.  With the goal of getting the data into long format for graphing, I needed to do a little work by combining the question ID field and the Answer ID field, which made visualizing these questions much easier.  
+
+
+```{r}
+
+#create a space for merged id fields
+df_merged$id <- df_merged$Quest_ID
+
+#create a new question identifier for all multi select check boxes
+mult <- df_merged$Question.Format=='Multi-Select (i.e. checkboxes)' 
+
+#subset all questions with Multi-Select
+subset <- df_merged[mult,]
+
+df_merged[mult, "id"] <- paste(subset$Quest_ID,subset$Ans_ID, sep=".")
+
+col_head <- df_merged %>% distinct(id,Question)
+
+df_long <- dcast(df_merged, Resp_ID~id, value.var="Resp_ans")
+
+#create column headings for the updated spreadsheet
+col_head <- df_merged %>% distinct(id,Question)
+col_head <- paste(col_head$id,col_head$Question, sep="-")
+
+col_head <- c("Resp_ID", col_head)
+
+colnames(df_long) <- col_head 
+
+```
+
+The below plot shows how satisfied new members are with AWHONN.
+
+```{r ggplot, fig.cap='Question #1', tidy=TRUE}
+#graph 914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
+
+
+
+pl <- ggplot(df_long,aes((`914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)`)))+geom_bar()+
+  xlab("Satisfaction Level") + labs(title="Overall, how satisfied are you being a member of AWHONN?", subtitle="n=1") +
+  ylim(c(0,20)) + theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust=0.5))
+
+pl
+
+```
