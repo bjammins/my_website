@@ -167,20 +167,21 @@ col_head &lt;- paste(col_head$id,col_head$Question, sep=&quot;-&quot;)
 col_head &lt;- c(&quot;Resp_ID&quot;, col_head)
 
 colnames(df_long) &lt;- col_head </code></pre>
-<div id="including-plots" class="section level1">
-<h1>Including Plots</h1>
-<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
-<pre class="r"><code>par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
-  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
-  init.angle = -50, border = NA
-)</code></pre>
-<div class="figure"><span id="fig:pie"></span>
-<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
+<p>The below plot shows how satisfied new members are with AWHONN.</p>
+<pre class="r"><code># graph 914786-1. Overall, how satisfied are you being a member of AWHONN?
+# (1=not at all, 5=completely satisfied)
+
+
+
+pl &lt;- ggplot(df_long, aes((`914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)`))) + 
+    geom_bar() + xlab(&quot;Satisfaction Level&quot;) + labs(title = &quot;Overall, how satisfied are you being a member of AWHONN?&quot;, 
+    subtitle = &quot;n=1&quot;) + ylim(c(0, 20)) + theme(plot.title = element_text(hjust = 0.5), 
+    plot.subtitle = element_text(hjust = 0.5))
+
+pl</code></pre>
+<div class="figure"><span id="fig:ggplot"></span>
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/ggplot-1.png" alt="Question #1" width="672" />
 <p class="caption">
-Figure 1: A fancy pie chart.
+Figure 1: Question #1
 </p>
-</div>
 </div>

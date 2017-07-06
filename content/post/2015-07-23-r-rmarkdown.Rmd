@@ -96,17 +96,17 @@ colnames(df_long) <- col_head
 
 ```
 
+The below plot shows how satisfied new members are with AWHONN.
 
-# Including Plots
+```{r ggplot, fig.cap='Question #1', tidy=TRUE}
+#graph 914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
 
-You can also embed plots. See Figure \@ref(fig:pie) for example:
 
-```{r pie, fig.cap='A fancy pie chart.', tidy=FALSE}
-par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
-  col = c('#0292D8', '#F7EA39', '#C4B632'),
-  init.angle = -50, border = NA
-)
+
+pl <- ggplot(df_long,aes((`914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)`)))+geom_bar()+
+  xlab("Satisfaction Level") + labs(title="Overall, how satisfied are you being a member of AWHONN?", subtitle="n=1") +
+  ylim(c(0,20)) + theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust=0.5))
+
+pl
+
 ```
