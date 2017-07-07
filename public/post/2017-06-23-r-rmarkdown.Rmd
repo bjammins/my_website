@@ -96,9 +96,9 @@ colnames(df_long) <- col_head
 
 ```
 
-The below plot shows how satisfied new members are with AWHONN.
+The below plot shows how satisfied new members are with AWHONN (complete with simulated data to protect the privacy of respondents).
 
-```{r ggplot, fig.cap='Question #1', tidy=TRUE}
+```{r, fig.cap='Question #1', tidy=TRUE}
 #graph 914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)
 
 
@@ -106,7 +106,96 @@ The below plot shows how satisfied new members are with AWHONN.
 pl <- ggplot(df_long,aes((`914786-1. Overall, how satisfied are you being a member of AWHONN? (1=not at all, 5=completely satisfied)`)))+geom_bar()+
   xlab("Satisfaction Level") + labs(title="Overall, how satisfied are you being a member of AWHONN?", subtitle="n=1") +
   ylim(c(0,20)) + theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust=0.5))
+pl
+
+
+```
+
+
+
+```{r , fig.cap='Question #2', tidy=TRUE}
+# 2. Which member benefits have you taken advantage of (check all that apply)?
+
+df_914787 <- df_long[ , grepl( "914787" , names( df_long ) )  ]
+
+df_914787 <- cbind(df_long$Resp_ID,df_914787[,])
+
+#changed name from 'df_long$Resp_ID' to 'Resp_ID'
+
+colnames(df_914787)[colnames(df_914787) == 'df_long$Resp_ID'] <- 'Resp_ID'
+
+melt_914787 <- melt(df_914787, id.vars="Resp_ID")
+
+melt_914787 <- na.omit(melt_914787,cols="value")
+
+
+
+pl <- ggplot(melt_914787,aes(factor(value)))+geom_bar()+
+  xlab("Benefits") 
+
+pl <- pl + labs(title="Which member benefits have you taken advantage of (check all that apply)?", subtitle="n=?") +
+  ylim(c(0,40)) + theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust=0.5))
 
 pl
 
 ```
+
+
+```{r , fig.cap='Question #3', tidy=TRUE}
+# 3. Do you follow AWHONN on social media (check all that apply)?
+
+
+df_914788 <- df_long[ , grepl( "914788" , names( df_long ) )  ]
+
+df_914788 <- cbind(df_long$Resp_ID,df_914788[,])
+
+colnames(df_914788)[colnames(df_914788) == 'df_long$Resp_ID'] <- 'Resp_ID'
+
+melt_914788 <- melt(df_914788, id.vars="Resp_ID")
+
+melt_914788<- na.omit(melt_914788,cols="value")
+
+pl <- ggplot(melt_914788,aes(factor(value)))+geom_bar()+
+  xlab("Social Media Outlet")+ theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))+
+  ggtitle("3. Do you follow AWHONN on social media (check all that apply)", subtitle = "n=?") +ylim(c(0,40))
+
+pl
+
+```
+
+
+
+```{r , fig.cap='Question #4', tidy=TRUE}
+#4. How do you prefer to receive news/announcements from AWHONN?
+
+
+
+df_914789 <- df_long[ , grepl( "914789" , names( df_long ) )  ]
+
+df_914789 <- cbind(df_long$Resp_ID,df_914789[,])
+
+colnames(df_914789)[colnames(df_914789) == 'df_long$Resp_ID'] <- 'Resp_ID'
+
+melt_914789 <- melt(df_914789, id.vars="Resp_ID")
+
+melt_914789<- na.omit(melt_914789,cols="value")
+
+pl <- ggplot(melt_914789,aes(factor(value)))+geom_bar()+
+  xlab("Method")+ theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5))+
+  ggtitle("4. How do you prefer to receive news/announcements from AWHONN? (check all that apply)", subtitle = "n=?") +ylim(c(0,40))
+
+pl
+
+```
+
+```{r , fig.cap='Question #5', tidy=TRUE}
+#5. The number of communications I receive from AWHONN is:
+
+pl <- ggplot(df_long,aes((`914790-5. The number of communications I receive from AWHONN is:`)))+geom_bar()+
+  xlab("Response") + labs(title="5. The number of communications I receive from AWHONN is:", subtitle="n=?") +
+  ylim(c(0,20)) + theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust=0.5))
+pl
+
+```
+
+

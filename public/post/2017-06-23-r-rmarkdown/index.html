@@ -116,18 +116,6 @@
         
 
         <li class="nav-item">
-          <a href="/#projects">
-            
-            <span>Projects</span>
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        <li class="nav-item">
           <a href="/#contact">
             
             <span>Contact</span>
@@ -396,7 +384,7 @@ col_head &lt;- paste(col_head$id,col_head$Question, sep=&quot;-&quot;)
 col_head &lt;- c(&quot;Resp_ID&quot;, col_head)
 
 colnames(df_long) &lt;- col_head </code></pre>
-<p>The below plot shows how satisfied new members are with AWHONN.</p>
+<p>The below plot shows how satisfied new members are with AWHONN (complete with simulated data to protect the privacy of respondents).</p>
 <pre class="r"><code># graph 914786-1. Overall, how satisfied are you being a member of AWHONN?
 # (1=not at all, 5=completely satisfied)
 
@@ -406,12 +394,105 @@ pl &lt;- ggplot(df_long, aes((`914786-1. Overall, how satisfied are you being a 
     geom_bar() + xlab(&quot;Satisfaction Level&quot;) + labs(title = &quot;Overall, how satisfied are you being a member of AWHONN?&quot;, 
     subtitle = &quot;n=1&quot;) + ylim(c(0, 20)) + theme(plot.title = element_text(hjust = 0.5), 
     plot.subtitle = element_text(hjust = 0.5))
-
 pl</code></pre>
-<div class="figure"><span id="fig:ggplot"></span>
-<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/ggplot-1.png" alt="Question #1" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/unnamed-chunk-5-1.png" alt="Question #1" width="672" />
 <p class="caption">
 Figure 1: Question #1
+</p>
+</div>
+<pre class="r"><code># 2. Which member benefits have you taken advantage of (check all that
+# apply)?
+
+df_914787 &lt;- df_long[, grepl(&quot;914787&quot;, names(df_long))]
+
+df_914787 &lt;- cbind(df_long$Resp_ID, df_914787[, ])
+
+# changed name from &#39;df_long$Resp_ID&#39; to &#39;Resp_ID&#39;
+
+colnames(df_914787)[colnames(df_914787) == &quot;df_long$Resp_ID&quot;] &lt;- &quot;Resp_ID&quot;
+
+melt_914787 &lt;- melt(df_914787, id.vars = &quot;Resp_ID&quot;)
+
+melt_914787 &lt;- na.omit(melt_914787, cols = &quot;value&quot;)
+
+
+
+pl &lt;- ggplot(melt_914787, aes(factor(value))) + geom_bar() + xlab(&quot;Benefits&quot;)
+
+pl &lt;- pl + labs(title = &quot;Which member benefits have you taken advantage of (check all that apply)?&quot;, 
+    subtitle = &quot;n=?&quot;) + ylim(c(0, 40)) + theme(plot.title = element_text(hjust = 0.5), 
+    plot.subtitle = element_text(hjust = 0.5))
+
+pl</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" alt="Question #2" width="672" />
+<p class="caption">
+Figure 2: Question #2
+</p>
+</div>
+<pre class="r"><code># 3. Do you follow AWHONN on social media (check all that apply)?
+
+
+df_914788 &lt;- df_long[, grepl(&quot;914788&quot;, names(df_long))]
+
+df_914788 &lt;- cbind(df_long$Resp_ID, df_914788[, ])
+
+colnames(df_914788)[colnames(df_914788) == &quot;df_long$Resp_ID&quot;] &lt;- &quot;Resp_ID&quot;
+
+melt_914788 &lt;- melt(df_914788, id.vars = &quot;Resp_ID&quot;)
+
+melt_914788 &lt;- na.omit(melt_914788, cols = &quot;value&quot;)
+
+pl &lt;- ggplot(melt_914788, aes(factor(value))) + geom_bar() + xlab(&quot;Social Media Outlet&quot;) + 
+    theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) + 
+    ggtitle(&quot;3. Do you follow AWHONN on social media (check all that apply)&quot;, 
+        subtitle = &quot;n=?&quot;) + ylim(c(0, 40))
+
+pl</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/unnamed-chunk-7-1.png" alt="Question #3" width="672" />
+<p class="caption">
+Figure 3: Question #3
+</p>
+</div>
+<pre class="r"><code># 4. How do you prefer to receive news/announcements from AWHONN?
+
+
+
+df_914789 &lt;- df_long[, grepl(&quot;914789&quot;, names(df_long))]
+
+df_914789 &lt;- cbind(df_long$Resp_ID, df_914789[, ])
+
+colnames(df_914789)[colnames(df_914789) == &quot;df_long$Resp_ID&quot;] &lt;- &quot;Resp_ID&quot;
+
+melt_914789 &lt;- melt(df_914789, id.vars = &quot;Resp_ID&quot;)
+
+melt_914789 &lt;- na.omit(melt_914789, cols = &quot;value&quot;)
+
+pl &lt;- ggplot(melt_914789, aes(factor(value))) + geom_bar() + xlab(&quot;Method&quot;) + 
+    theme(plot.title = element_text(hjust = 0.5), plot.subtitle = element_text(hjust = 0.5)) + 
+    ggtitle(&quot;4. How do you prefer to receive news/announcements from AWHONN? (check all that apply)&quot;, 
+        subtitle = &quot;n=?&quot;) + ylim(c(0, 40))
+
+pl</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/unnamed-chunk-8-1.png" alt="Question #4" width="672" />
+<p class="caption">
+Figure 4: Question #4
+</p>
+</div>
+<pre class="r"><code># 5. The number of communications I receive from AWHONN is:
+
+pl &lt;- ggplot(df_long, aes((`914790-5. The number of communications I receive from AWHONN is:`))) + 
+    geom_bar() + xlab(&quot;Response&quot;) + labs(title = &quot;5. The number of communications I receive from AWHONN is:&quot;, 
+    subtitle = &quot;n=?&quot;) + ylim(c(0, 20)) + theme(plot.title = element_text(hjust = 0.5), 
+    plot.subtitle = element_text(hjust = 0.5))
+pl</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/2017-06-23-r-rmarkdown_files/figure-html/unnamed-chunk-9-1.png" alt="Question #5" width="672" />
+<p class="caption">
+Figure 5: Question #5
 </p>
 </div>
 
@@ -424,13 +505,7 @@ Figure 1: Question #1
   <nav>
   <ul class="pager">
     
-    <li class="previous"><a href="/post/getting-started/"><span
-      aria-hidden="true">&larr;</span> Getting started with the Academic framework for Hugo</a></li>
-    
 
-    
-    <li class="next"><a href="/post/2015-07-23-r-rmarkdown/">Analyzing Member Survey Data <span
-      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>
