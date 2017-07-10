@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.21" />
+  <meta name="author" content="Benjamin Scheich">
+  <meta name="description" content="Director, Data Analytics">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/highlight.min.css">
+    
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/academicons.min.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
+  <link rel="stylesheet" href="/css/hugo-academic.css">
+  
+
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="">
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="/post/2017-06-01-r-rmarkdown/">
+
+  
+
+  <title>What is MLE? | </title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#talks">
+            
+            <span>Talks</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+  <div class="article-container">
+    <h1 itemprop="name">What is MLE?</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-06-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Thu, Jun 1, 2017
+    </time>
+  </span>
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/tags/r-markdown">R Markdown</a
+    >, 
+    
+    <a href="/tags/maximum-likelihood-estimation">Maximum Likelihood Estimation</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-06-01-r-rmarkdown%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=What%20is%20MLE%3f&amp;url=%2fpost%2f2017-06-01-r-rmarkdown%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-06-01-r-rmarkdown%2f&amp;title=What%20is%20MLE%3f"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-06-01-r-rmarkdown%2f&amp;title=What%20is%20MLE%3f"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=What%20is%20MLE%3f&amp;body=%2fpost%2f2017-06-01-r-rmarkdown%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      <p>A colleague stopped by my office the other day and asked me a simple question: Why do we often see the mean of sample of data published in journal articles? I’m sure you are thinking, “why aren’t you talking about something more interesting with your work colleague, like your NCAA tournament bracket?” Well, the short answer is my bracket had already busted, so I’d gladly talk about anything else. Now, back to addressing the question at hand: my colleague’s reasoning was that the readers are most comfortable with seeing the mean, as they are most familiar with it from their statistics classes in high school. I told her that I was sure some of the journal article reviewers may use that reasoning, but the actual reason is a bit more nuanced.</p>
+<p>When we think about a sample of data, we have to consider the distribution, or shape, of the data. If we can recognize the shape of the data as something that is familiar to us, it’s all the better for us to be able to describe the data. In math terms, we recognize the distribution by comparing it to known probability distributions, which are distributions with shapes that are described by math functions. Probably the best example is the normal distribution. At some point in our lives, most of us have heard people talk about the bell curve, grading “on the curve,” etc. My guess is that many people haven’t seen the function that describes the normal distribution; if they have, they certainly haven’t memorized it. But here it is in all its glory:</p>
+<p><span class="math display">\[P(x) = \frac{1}{{\sigma \sqrt {2\pi } }} e^{ \frac{-( {x - \mu })^2}{2\sigma ^2 }} \]</span></p>
+<p>Where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are population parameters that describe the function. Confused yet? I know, any article that has greek letters and equations in it are not the type of articles that trend on Yahoo, but stick with me; we will be answering my colleague’s question soon.</p>
+<p>Since we can describe our data using a known mathematical formula, an easy way to tell people about our data is to provide our best guess for a parameter. How do we determine the best guess for a parameter? For the normal distribution, the best guess is found by using a method known as maximum likelihood estimation (mle). The theory behind mle is as follows: let’s look at our sample data, and based upon us looking at this data, we want to answer the question of what is the most likely parameter that will give us these data? For the normal distribution, our best guess of <span class="math inline">\(\mu\)</span>, as shown by a very cool exercise in solving for the mle using calculus, is the sample mean:</p>
+<p>We also find that the mle for <span class="math inline">\(\mu\)</span> is unbiased, which makes it a good estimator.</p>
+<p>Solving for the mle for <span class="math inline">\(\sigma^2\)</span>, we come up with the following:</p>
+<p>An interesting issue that arises when solving for the mle for sigma squared is that we find that the estimator is biased. What does this mean? If we use the maximum likelihood estimator described above for sigma squared, our estimate will be consistently wrong. If we do a little mathematical work, and some algebra, we can show that:</p>
+<p>Is an unbiased estimator of sigma-squared.</p>
+<p>So, to go back to my colleague’s original question, we often see the mean of sample data published in journal articles because, most likely, the sample data resemble a normal distribution, and the sample mean is the best estimator of the population mean. Similarly, the sample variance, <span class="math inline">\(s^2\)</span>, is the best estimator for the population variance.</p>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+
+    
+    <li class="next"><a href="/post/2017-06-23-r-rmarkdown/">Analyzing Member Survey Data <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Benjamin Scheich &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+    <script src="/js/jquery-1.12.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/isotope.pkgd.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+    
+
+  </body>
+</html>
+
