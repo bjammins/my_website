@@ -1,0 +1,37 @@
+---
+title: "What is MLE?"
+author: "Ben Scheich"
+date: 2017-06-01
+categories: ["R"]
+tags: ["R Markdown", "Maximum Likelihood Estimation"]
+---
+
+A colleague stopped by my office the other day and asked me a simple question:  Why do we often see the mean of sample of data published in journal articles?  I'm sure you are thinking, "why aren't you talking about something more interesting with your work colleague, like your NCAA tournament bracket?"  Well, the short answer is my bracket had already busted, so I'd gladly talk about anything else.  Now, back to addressing the question at hand: my colleague's reasoning was that the readers are most comfortable with seeing the mean, as they are most familiar with it from their statistics classes in high school.  I told her that I was sure some of the journal article reviewers may use that reasoning, but the actual reason is a bit more nuanced.  
+
+When we think about a sample of data, we have to consider the distribution, or shape, of the data.  If we can recognize the shape of the data as something that is familiar to us, it's all the better for us to be able to describe the data.  In math terms, we recognize the distribution by comparing it to known probability distributions, which are distributions with shapes that are described by math functions.  Probably the best example is the normal distribution.  At some point in our lives, most of us have heard people talk about the bell curve, grading "on the curve," etc.   My guess is that many people haven't seen the function that describes the normal distribution; if they have, they certainly haven't memorized it.  But here it is in all its glory:
+
+
+$$P(x) = \frac{1}{{\sigma \sqrt {2\pi } }} e^{ \frac{-( {x - \mu })^2}{2\sigma ^2 }} $$
+
+
+Where $\mu$ and $\sigma^2$ are population parameters that describe the function.  Confused yet?  I know, any article that has greek letters and equations in it are not the type of articles that trend on Yahoo, but stick with me; we will be answering my colleague's question soon.
+
+Since we can describe our data using a known mathematical formula, an easy way to tell people about our data is to provide our best guess for a parameter.  How do we determine the best guess for a parameter? For the normal distribution, the best guess is found by using a method known as maximum likelihood estimation (mle).  The theory behind mle is as follows:  let's look at our sample data, and based upon us looking at this data, we want to answer the question of what is the most likely parameter that will give us these data? For the normal distribution, our best guess of $\mu$, as shown by a very cool exercise in solving for the mle using calculus, is the sample mean:
+
+
+
+
+We also find that the mle for $\mu$ is unbiased, which makes it a good estimator.
+
+Solving for the mle for $\sigma^2$, we come up with the following:
+
+
+An interesting issue that arises when solving for the mle for sigma squared is that we find that the estimator is biased.  What does this mean?  If we use the maximum likelihood estimator described above for sigma squared, our estimate will be consistently wrong.  If we do a little mathematical work, and some algebra, we can show that:
+
+
+Is an unbiased estimator of sigma-squared.
+
+
+So, to go back to my colleague's original question, we often see the mean of sample data published in journal articles because, most likely, the sample data resemble a normal distribution, and the sample mean is the best estimator of the population mean.  Similarly, the sample variance, $s^2$, is the best estimator for the population variance.
+
+   
