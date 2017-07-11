@@ -18,15 +18,15 @@ $$P(x) = \frac{1}{{\sigma \sqrt {2\pi } }} e^{ \frac{-( {x - \mu })^2}{2\sigma ^
 
 Where $\mu$ and $\sigma^2$ are population parameters that describe the function.  Confused yet?  I know, any article that has greek letters and equations in it are not the type of articles that trend on Yahoo, but stick with me; we will be answering my colleague's question soon.
 
-Since we can describe our data using a known mathematical formula, an easy way to tell people about our data is to provide our best guess for a parameter.  How do we determine the best guess for a parameter? For the normal distribution, the best guess is found by using a method known as maximum likelihood estimation (mle).  The theory behind mle is as follows:  let's look at our sample data, and based upon us looking at this data, we want to answer the question of what is the most likely parameter that will give us these data? For the normal distribution, our best guess of $\mu$, as shown by a very cool exercise in solving for the mle using calculus, is the sample mean:
-
-
-
+Since we can describe our data using a known mathematical formula, an easy way to tell people about our data is to provide our best guess for a parameter.  How do we determine the best guess for a parameter? For the normal distribution, the best guess is found by using a method known as maximum likelihood estimation (mle).  The theory behind mle is as follows:  let's look at our sample data, and based upon us looking at this data, we want to answer the question of what is the most likely parameter that will give us these data? For the normal distribution, our best guess of $\mu$, as shown by a very cool exercise in solving for the mle using calculus, is the sample mean.
+ $$\hat{\mu}=\frac{\sum_{}x_i}{n}=\bar{x}$$
 
 We also find that the mle for $\mu$ is unbiased, which makes it a good estimator.
 
+
 Solving for the mle for $\sigma^2$, we come up with the following:
 
+$$\hat{\sigma}^2=\frac{\sum_{}{(x_i-\bar{x})}}{n}$$
 
 An interesting issue that arises when solving for the mle for sigma squared is that we find that the estimator is biased.  What does this mean?  If we use the maximum likelihood estimator described above for sigma squared, our estimate will be consistently wrong.  If we do a little mathematical work, and some algebra, we can show that:
 
