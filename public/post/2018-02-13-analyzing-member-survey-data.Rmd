@@ -1,0 +1,20 @@
+---
+title: Analyzing Member Survey Data
+author: ben Scheich
+date: '2018-02-13'
+slug: analyzing-member-survey-data
+categories: []
+tags: []
+---
+
+ 
+```{r setup, include=FALSE}
+library(ggplot2)
+library(reshape2)
+library(dplyr)
+library(readxl)
+#library(RCurl)
+library(XML)
+```
+
+Test test 123

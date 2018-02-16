@@ -1,8 +1,8 @@
 {
-    "path" : "~/my_website_updated/content/publication",
+    "path" : "~/my_website/public/post/2017-07-23-r-rmarkdown",
     "sortOrder" : [
         {
-            "ascending" : true,
+            "ascending" : false,
             "columnIndex" : 2
         }
     ]
