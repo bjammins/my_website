@@ -34,11 +34,11 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
 
-  <link rel="canonical" href="/post/2017-06-01-r-rmarkdown/">
+  <link rel="canonical" href="/post/2018-05-16-summing-tables-in-dplyr/">
 
   
 
-  <title>What is MLE? | </title>
+  <title>Summing Tables in dplyr | </title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
@@ -138,14 +138,14 @@
   
 
   <div class="article-container">
-    <h1 itemprop="name">What is MLE?</h1>
+    <h1 itemprop="name">Summing Tables in dplyr</h1>
     
 
 <div class="article-metadata">
 
   <span class="article-date">
-    <time datetime="2017-06-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-      Thu, Jun 1, 2017
+    <time datetime="2018-05-16 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Wed, May 16, 2018
     </time>
   </span>
 
@@ -168,10 +168,7 @@
   <span class="article-tags">
     <i class="fa fa-tags"></i>
     
-    <a href="/tags/r-markdown">R Markdown</a
-    >, 
-    
-    <a href="/tags/maximum-likelihood-estimation">Maximum Likelihood Estimation</a
+    <a href="/tags/summary">summary</a
     >
     
   </span>
@@ -184,35 +181,35 @@
   <ul class="share">
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-06-01-r-rmarkdown%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2018-05-16-summing-tables-in-dplyr%2f"
          target="_blank">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=What%20is%20MLE%3f&amp;url=%2fpost%2f2017-06-01-r-rmarkdown%2f"
+         href="https://twitter.com/intent/tweet?text=Summing%20Tables%20in%20dplyr&amp;url=%2fpost%2f2018-05-16-summing-tables-in-dplyr%2f"
          target="_blank">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-06-01-r-rmarkdown%2f&amp;title=What%20is%20MLE%3f"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2018-05-16-summing-tables-in-dplyr%2f&amp;title=Summing%20Tables%20in%20dplyr"
          target="_blank">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-06-01-r-rmarkdown%2f&amp;title=What%20is%20MLE%3f"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2018-05-16-summing-tables-in-dplyr%2f&amp;title=Summing%20Tables%20in%20dplyr"
          target="_blank">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=What%20is%20MLE%3f&amp;body=%2fpost%2f2017-06-01-r-rmarkdown%2f">
+         href="mailto:?subject=Summing%20Tables%20in%20dplyr&amp;body=%2fpost%2f2018-05-16-summing-tables-in-dplyr%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -225,17 +222,48 @@
 </div>
 
     <div class="article-style" itemprop="articleBody">
-      <p>A colleague stopped by my office the other day and asked me a simple question: Why do we often see the mean of sample of data published in journal articles? I’m sure you are thinking, “why aren’t you talking about something more interesting with your work colleague, like your NCAA tournament bracket?” Well, the short answer is my bracket had already busted, so I’d gladly talk about anything else. Now, back to addressing the question at hand: my colleague’s reasoning was that the readers are most comfortable with seeing the mean, as they are most familiar with it from their statistics classes in high school. I told her that I was sure some of the journal article reviewers may use that reasoning, but the actual reason is a bit more nuanced.</p>
-<p>When we think about a sample of data, we have to consider the distribution, or shape, of the data. If we can recognize the shape of the data as something that is familiar to us, it’s all the better for us to be able to describe the data. In math terms, we recognize the distribution by comparing it to known probability distributions, which are distributions with shapes that are described by math functions. Probably the best example is the normal distribution. At some point in our lives, most of us have heard people talk about the bell curve, grading “on the curve,” etc. My guess is that many people haven’t seen the function that describes the normal distribution; if they have, they certainly haven’t memorized it. But here it is in all its glory:</p>
-<p><span class="math display">\[P(x) = \frac{1}{{\sigma \sqrt {2\pi } }} e^{ \frac{-( {x - \mu })^2}{2\sigma ^2 }} \]</span></p>
-<p>Where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are population parameters that describe the function. Confused yet? I know, any article that has greek letters and equations in it are not the type of articles that trend on Yahoo, but stick with me; we will be answering my colleague’s question soon.</p>
-<p>Since we can describe our data using a known mathematical formula, an easy way to tell people about our data is to provide our best guess for a parameter. How do we determine the best guess for a parameter? For the normal distribution, the best guess is found by using a method known as maximum likelihood estimation (mle). The theory behind mle is as follows: let’s look at our sample data, and based upon us looking at this data, we want to answer the question of what is the most likely parameter that will give us these data? For the normal distribution, our best guess of <span class="math inline">\(\mu\)</span>, as shown by a very cool exercise in solving for the mle using calculus, is the sample mean. <span class="math display">\[\hat{\mu}=\frac{\sum_{}x_i}{n}=\bar{x}\]</span></p>
-<p>We also find that the mle for <span class="math inline">\(\mu\)</span> is unbiased, which makes it a good estimator.</p>
-<p>Solving for the mle for <span class="math inline">\(\sigma^2\)</span>, we come up with the following:</p>
-<p><span class="math display">\[\hat{\sigma}^2=\frac{\sum_{}{(x_i-\bar{x})}}{n}\]</span></p>
-<p>An interesting issue that arises when solving for the mle for sigma squared is that we find that the estimator is biased. What does this mean? If we use the maximum likelihood estimator described above for sigma squared, our estimate will be consistently wrong. If we do a little mathematical work, and some algebra, we can show that:</p>
-<p>Is an unbiased estimator of sigma-squared.</p>
-<p>So, to go back to my colleague’s original question, we often see the mean of sample data published in journal articles because, most likely, the sample data resemble a normal distribution, and the sample mean is the best estimator of the population mean. Similarly, the sample variance, <span class="math inline">\(s^2\)</span>, is the best estimator for the population variance.</p>
+      <p>We have a Tableau license here at work, but I’m always trying to replicate Tableau’s output into R. Recently, I was thinking about how to place summary “Totals”&quot; in a bottom row of an R table, and I realized that it was something that was not discussed much in lectures I attend. Most likely, it is considered too easy to discuss, but it is incredibly important when presenting certain types of data. For example, we summarize sales utilization data by year at work, and it is only natural to place a summary total on this table.</p>
+<p>I often find myself searching past code, trying to get the syntax correct, but I thought it would make more sense to summarize it here, so I can find it easily.</p>
+<p>First, we can simulate sales data for four data periods, as shown below:</p>
+<pre class="r"><code>library(tidyverse)
+
+#create the sales data frame with sample data
+sales &lt;- as.data.frame(matrix(runif(16, min = 0, max = 100), nrow = 4))
+sales &lt;- round(sales, 2)
+sales</code></pre>
+<pre><code>##      V1    V2    V3    V4
+## 1 60.73 24.94 73.42 79.00
+## 2 77.89 70.65  6.66 46.59
+## 3 28.68 42.01 52.59  1.06
+## 4 19.66 91.18  5.78 75.98</code></pre>
+<p>To sum the sales data for each period, we would perform the following:</p>
+<pre class="r"><code>#find column totals
+sales_totals &lt;- sales %&gt;% select(V1:V4) %&gt;% summarise_all(funs(sum))
+#bind totals to sales table
+sales &lt;- bind_rows(sales, sales_totals)
+
+# create a function to format currency
+currency &lt;- function(x) {
+  new &lt;- paste(&quot;$&quot;, formatC(round(x, 2), format = &#39;f&#39;, digits = 2),sep = &quot;&quot;)
+  print(new)
+}
+
+#apply currency function to rows and columns
+sales &lt;- apply(sales, 1:2, currency)
+
+#set Col names and Row names
+col_names &lt;- paste(&quot;Period&quot;, 1:4, sep = &quot;_&quot;)
+row_names &lt;- c(paste(&quot;Region&quot;, 1:4, sep = &quot; &quot;), &quot;Total&quot;)
+colnames(sales) &lt;- col_names
+sales &lt;- bind_cols(data.frame(row_names),data.frame(sales)) %&gt;% rename(Region = row_names)</code></pre>
+<p>Finally, after proper formatting, we have our table:</p>
+<pre class="r"><code>sales</code></pre>
+<pre><code>##     Region Period_1 Period_2 Period_3 Period_4
+## 1 Region 1   $60.73   $24.94   $73.42   $79.00
+## 2 Region 2   $77.89   $70.65    $6.66   $46.59
+## 3 Region 3   $28.68   $42.01   $52.59    $1.06
+## 4 Region 4   $19.66   $91.18    $5.78   $75.98
+## 5    Total  $186.96  $228.78  $138.45  $202.63</code></pre>
 
     </div>
   </div>
@@ -246,10 +274,10 @@
   <nav>
   <ul class="pager">
     
-
+    <li class="previous"><a href="/post/2017-06-01-r-rmarkdown/"><span
+      aria-hidden="true">&larr;</span> What is MLE?</a></li>
     
-    <li class="next"><a href="/post/2018-05-16-summing-tables-in-dplyr/">Summing Tables in dplyr <span
-      aria-hidden="true">&rarr;</span></a></li>
+
     
   </ul>
 </nav>

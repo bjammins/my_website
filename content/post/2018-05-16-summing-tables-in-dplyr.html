@@ -1,0 +1,52 @@
+---
+title: "Summing Tables in dplyr"
+author: "Ben Scheich"
+date: '2018-05-16'
+tags: ["summary"]
+categories: ["R"]
+---
+
+
+
+<p>We have a Tableau license here at work, but I’m always trying to replicate Tableau’s output into R. Recently, I was thinking about how to place summary “Totals”&quot; in a bottom row of an R table, and I realized that it was something that was not discussed much in lectures I attend. Most likely, it is considered too easy to discuss, but it is incredibly important when presenting certain types of data. For example, we summarize sales utilization data by year at work, and it is only natural to place a summary total on this table.</p>
+<p>I often find myself searching past code, trying to get the syntax correct, but I thought it would make more sense to summarize it here, so I can find it easily.</p>
+<p>First, we can simulate sales data for four data periods, as shown below:</p>
+<pre class="r"><code>library(tidyverse)
+
+#create the sales data frame with sample data
+sales &lt;- as.data.frame(matrix(runif(16, min = 0, max = 100), nrow = 4))
+sales &lt;- round(sales, 2)
+sales</code></pre>
+<pre><code>##      V1    V2    V3    V4
+## 1 60.73 24.94 73.42 79.00
+## 2 77.89 70.65  6.66 46.59
+## 3 28.68 42.01 52.59  1.06
+## 4 19.66 91.18  5.78 75.98</code></pre>
+<p>To sum the sales data for each period, we would perform the following:</p>
+<pre class="r"><code>#find column totals
+sales_totals &lt;- sales %&gt;% select(V1:V4) %&gt;% summarise_all(funs(sum))
+#bind totals to sales table
+sales &lt;- bind_rows(sales, sales_totals)
+
+# create a function to format currency
+currency &lt;- function(x) {
+  new &lt;- paste(&quot;$&quot;, formatC(round(x, 2), format = &#39;f&#39;, digits = 2),sep = &quot;&quot;)
+  print(new)
+}
+
+#apply currency function to rows and columns
+sales &lt;- apply(sales, 1:2, currency)
+
+#set Col names and Row names
+col_names &lt;- paste(&quot;Period&quot;, 1:4, sep = &quot;_&quot;)
+row_names &lt;- c(paste(&quot;Region&quot;, 1:4, sep = &quot; &quot;), &quot;Total&quot;)
+colnames(sales) &lt;- col_names
+sales &lt;- bind_cols(data.frame(row_names),data.frame(sales)) %&gt;% rename(Region = row_names)</code></pre>
+<p>Finally, after proper formatting, we have our table:</p>
+<pre class="r"><code>sales</code></pre>
+<pre><code>##     Region Period_1 Period_2 Period_3 Period_4
+## 1 Region 1   $60.73   $24.94   $73.42   $79.00
+## 2 Region 2   $77.89   $70.65    $6.66   $46.59
+## 3 Region 3   $28.68   $42.01   $52.59    $1.06
+## 4 Region 4   $19.66   $91.18    $5.78   $75.98
+## 5    Total  $186.96  $228.78  $138.45  $202.63</code></pre>

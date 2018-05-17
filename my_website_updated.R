@@ -1,7 +1,8 @@
 setwd("/Users/benjaminscheich/my_website_updated")
-if (!requireNamespace("devtools")) install.packages("devtools")
-devtools::install_github("rstudio/blogdown")
+#if (!requireNamespace("devtools")) install.packages("devtools")
+#devtools::install_github("rstudio/blogdown")
 
+library(blogdown)
 #blogdown::new_site()
 
 

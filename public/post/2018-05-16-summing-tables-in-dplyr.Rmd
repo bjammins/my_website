@@ -1,0 +1,52 @@
+---
+title: "Summing Tables in dplyr"
+author: "Ben Scheich"
+date: '2018-05-16'
+tags: ["summary"]
+categories: ["R"]
+---
+
+We have a Tableau license here at work, but I'm always trying to replicate Tableau's output into R. Recently, I was thinking about how to place summary "Totals"" in a bottom row of an R table, and I realized that it was something that was not discussed much in lectures I attend.  Most likely, it is considered too easy to discuss, but it is incredibly important when presenting certain types of data.  For example, we summarize sales utilization data by year at work, and it is only natural to place a summary total on this table.  
+
+I often find myself searching past code, trying to get the syntax correct, but I thought it would make more sense to summarize it here, so I can find it easily.
+
+First, we can simulate sales data for four data periods, as shown below:
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+#create the sales data frame with sample data
+sales <- as.data.frame(matrix(runif(16, min = 0, max = 100), nrow = 4))
+sales <- round(sales, 2)
+sales
+```
+
+To sum the sales data for each period, we would perform the following:
+
+```{r, echo = TRUE, warning = FALSE, results = "hide"}
+#find column totals
+sales_totals <- sales %>% select(V1:V4) %>% summarise_all(funs(sum))
+#bind totals to sales table
+sales <- bind_rows(sales, sales_totals)
+
+# create a function to format currency
+currency <- function(x) {
+  new <- paste("$", formatC(round(x, 2), format = 'f', digits = 2),sep = "")
+  print(new)
+}
+
+#apply currency function to rows and columns
+sales <- apply(sales, 1:2, currency)
+
+#set Col names and Row names
+col_names <- paste("Period", 1:4, sep = "_")
+row_names <- c(paste("Region", 1:4, sep = " "), "Total")
+colnames(sales) <- col_names
+sales <- bind_cols(data.frame(row_names),data.frame(sales)) %>% rename(Region = row_names)
+```
+
+Finally, after proper formatting, we have our table:
+
+```{r}
+sales
+```
+
