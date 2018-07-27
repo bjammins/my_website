@@ -22,7 +22,7 @@ defaultContentLanguageInSubdir = false
   name = "Benjamin Scheich"
   role = "Director, Data Analytics"
   organization = "Association of Women's Health, Obstetric and Neonatal Nurses"
-  organization_url = "www.awhonn.org"
+  organization_url = "http://www.awhonn.org"
   avatar = "portrait.jpg"
   email = "benjamin.scheich@gmail.com"
   

@@ -26,10 +26,10 @@ sales &amp;lt;- as.data.frame(matrix(runif(16, min = 0, max = 100), nrow = 4))
 sales &amp;lt;- round(sales, 2)
 sales&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      V1    V2    V3    V4
-## 1 12.94 72.60 28.67 10.63
-## 2 64.23 84.55 29.55  6.87
-## 3 74.90 92.44 15.15 77.08
-## 4 95.14 76.91 35.03 46.65&lt;/code&gt;&lt;/pre&gt;
+## 1 64.36 27.71 15.92 60.28
+## 2 39.95 99.68 69.04 81.00
+## 3 75.30 63.18 30.46 43.94
+## 4  7.57 74.17 85.06 24.94&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To sum the sales data for each period, we would perform the following:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#find column totals
 sales_totals &amp;lt;- sales %&amp;gt;% select(V1:V4) %&amp;gt;% summarise_all(funs(sum))
@@ -53,11 +53,11 @@ sales &amp;lt;- bind_cols(data.frame(row_names),data.frame(sales)) %&amp;gt;% re
 &lt;p&gt;Finally, after proper formatting, we have our table:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sales&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Region Period_1 Period_2 Period_3 Period_4
-## 1 Region 1   $12.94   $72.60   $28.67   $10.63
-## 2 Region 2   $64.23   $84.55   $29.55    $6.87
-## 3 Region 3   $74.90   $92.44   $15.15   $77.08
-## 4 Region 4   $95.14   $76.91   $35.03   $46.65
-## 5    Total  $247.21  $326.50  $108.40  $141.23&lt;/code&gt;&lt;/pre&gt;
+## 1 Region 1   $64.36   $27.71   $15.92   $60.28
+## 2 Region 2   $39.95   $99.68   $69.04   $81.00
+## 3 Region 3   $75.30   $63.18   $30.46   $43.94
+## 4 Region 4    $7.57   $74.17   $85.06   $24.94
+## 5    Total  $187.18  $264.74  $200.48  $210.16&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
