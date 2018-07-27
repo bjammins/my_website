@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/post/executive-dashboards-with-flexdashboard/</loc>
+      <lastmod>2018-07-27T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/2018-05-16-summing-tables-in-dplyr/</loc>
       <lastmod>2018-05-16T00:00:00+00:00</lastmod>
     </url>
@@ -42,15 +51,6 @@
     <url>
     
       <loc>/publication/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/talk/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -97,15 +97,6 @@
     
       <loc>/publication/perinatal-staffing/</loc>
       <lastmod>2015-02-04T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/talk/example-talk/</loc>
-      <lastmod>2012-08-01T00:00:00+00:00</lastmod>
     </url>
     
   
