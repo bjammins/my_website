@@ -1,9 +1,9 @@
 ---
-title: Executive Dashboards With Flexdashboard
-author: Benjamin Scheich
-date: '2018-07-27'
-slug: executive-dashboards-with-flexdashboard
-categories: []
-tags: []
+title: "Executive Dashboard"
+author: "Ben Scheich"
+date: '2018-08-03'
+tags: ["summary"]
+categories: ["R"]
 ---
 
+<a href=/files/sample_dashboard.html target="blank"> Sample Dashboard</a>
