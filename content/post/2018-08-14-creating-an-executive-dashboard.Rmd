@@ -17,5 +17,5 @@ Luckily, the RStudio team had a solution for creating the html file: flexdashboa
 
 Deployment of the file went smoothly, as did the automatic data update.  Our Board of Directors was very impressed with the design and the usability.  They referenced the data in the dashboard numerous times throughout the meetings. And I was excited to add another visual tool to my R aresenal.
 
-Source code for my sample dashboard can be found here.
+Source code for my sample dashboard can be found <a href=https://github.com/bjammins/sample_dashboard target="blank"> here</a>.
 

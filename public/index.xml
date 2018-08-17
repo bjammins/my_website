@@ -21,7 +21,7 @@
 &lt;p&gt;Having attended the rstudio::conf in January of 2018, I came back with lots of ideas about how to use R to meet my needs. Shiny was an option, but deployment of the application was an issue. I needed something that was free, and the free version of shinyapps.io or the open source version of shiny server were not options. While talking with our Director of Web Services, we came upon a possible solution: If I could create an .html file that contained all of the dashboard’s information, I could ftp the file to a place on the web server and we could share the web link with the Board and Executive team. To automatically update the data, I could create a Windows task that would update the file and push it to the web.&lt;/p&gt;
 &lt;p&gt;Luckily, the RStudio team had a solution for creating the html file: flexdashboard. There are lots of great examples online on how to create a flexdashboard. The examples made it easy to do, and I was able to build one fairly quickly. Here is a &lt;a href=/files/sample_dashboard.html target=&#34;blank&#34;&gt; sample dashboard&lt;/a&gt; based upon the layout that I used. Of course, the data here aren’t real, but I think it conveys the idea.&lt;/p&gt;
 &lt;p&gt;Deployment of the file went smoothly, as did the automatic data update. Our Board of Directors was very impressed with the design and the usability. They referenced the data in the dashboard numerous times throughout the meetings. And I was excited to add another visual tool to my R aresenal.&lt;/p&gt;
-&lt;p&gt;Source code for my sample dashboard can be found here.&lt;/p&gt;
+&lt;p&gt;Source code for my sample dashboard can be found &lt;a href=https://github.com/bjammins/sample_dashboard target=&#34;blank&#34;&gt; here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -41,10 +41,10 @@ sales &amp;lt;- as.data.frame(matrix(runif(16, min = 0, max = 100), nrow = 4))
 sales &amp;lt;- round(sales, 2)
 sales&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      V1    V2    V3    V4
-## 1 30.50 18.63 41.18 33.48
-## 2 26.51 87.08 51.24 46.25
-## 3 92.98 45.44 53.00 89.26
-## 4 55.50 97.15 20.76 51.16&lt;/code&gt;&lt;/pre&gt;
+## 1  8.75 93.21 65.17 83.88
+## 2 78.43 35.85 38.42 16.11
+## 3 66.17 98.48  1.31 27.16
+## 4 92.94 98.03 61.13 95.96&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To sum the sales data for each period, we would perform the following:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#find column totals
 sales_totals &amp;lt;- sales %&amp;gt;% select(V1:V4) %&amp;gt;% summarise_all(funs(sum))
@@ -68,11 +68,11 @@ sales &amp;lt;- bind_cols(data.frame(row_names),data.frame(sales)) %&amp;gt;% re
 &lt;p&gt;Finally, after proper formatting, we have our table:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;sales&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##     Region Period_1 Period_2 Period_3 Period_4
-## 1 Region 1   $30.50   $18.63   $41.18   $33.48
-## 2 Region 2   $26.51   $87.08   $51.24   $46.25
-## 3 Region 3   $92.98   $45.44   $53.00   $89.26
-## 4 Region 4   $55.50   $97.15   $20.76   $51.16
-## 5    Total  $205.49  $248.30  $166.18  $220.15&lt;/code&gt;&lt;/pre&gt;
+## 1 Region 1    $8.75   $93.21   $65.17   $83.88
+## 2 Region 2   $78.43   $35.85   $38.42   $16.11
+## 3 Region 3   $66.17   $98.48    $1.31   $27.16
+## 4 Region 4   $92.94   $98.03   $61.13   $95.96
+## 5    Total  $246.29  $325.57  $166.03  $223.11&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
