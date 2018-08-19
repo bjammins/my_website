@@ -15,7 +15,7 @@ Having attended the rstudio::conf in January of 2018, I came back with ideas abo
 
 Luckily, the RStudio team had a solution for creating the .html file: flexdashboard.  The examples on the RStudio web page made it easy to create, and I was able to build one fairly quickly.  Here is a <a href=/files/sample_dashboard.html target="blank"> sample dashboard</a> based upon the layout that I used.  Of course, the data here aren't real, but I think it conveys the idea.  
 
-Deployment of the file went smoothly, as did the automatic data update.  Our Board of Directors was impressed with the design and the usability.  They referenced the data in the dashboard numerous times throughout the meetings. And I was excited to add another visual tool to my R aresenal.
+Deployment of the file went smoothly, as did the automatic data update.  Our Board of Directors was impressed with the design and the usability.  They referenced the data in the dashboard numerous times throughout the meetings. And I was excited to add another visual tool to my R arsenal.
 
 Source code for my sample dashboard can be found <a href=https://github.com/bjammins/sample_dashboard target="blank"> here</a>.
 
